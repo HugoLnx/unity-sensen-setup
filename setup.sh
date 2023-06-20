@@ -35,7 +35,12 @@ if [[ -z "${ONLY_GIT}" ]]; then
     cp "$SETUP_ROOT/ConfigFiles/omnisharp.json" .
     cp "$SETUP_ROOT/ConfigFiles/NuGet.config" ./Assets/
     cp "$SETUP_ROOT/ConfigFiles/packages.config" ./Assets/
-    cp "$SETUP_ROOT/ConfigFiles/manifest.json" ./Packages/
+    // if TWOD is set use the 2D manifest
+    if [[ -z "${TWOD}" ]]; then
+        cp "$SETUP_ROOT/ConfigFiles/manifest.json" ./Packages/manifest.json
+    else
+        cp "$SETUP_ROOT/ConfigFiles/manifest.2d.json" ./Packages/manifest.json
+    fi
     cp -r "$SETUP_ROOT/Templates/ProjectStructure/" ./Assets/MY_GAME_NAME/
     mkdir ./PackagesBatch/
     touch ./PackagesBatch/.gitkeep
